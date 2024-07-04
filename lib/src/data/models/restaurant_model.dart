@@ -5,16 +5,16 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'restaurant_model.freezed.dart';
 part 'restaurant_model.g.dart';
 
-@freezed
-class RestaurantModel with _$RestaurantModel {
-  factory RestaurantModel({
-    @JsonKey(name: 'type') @Default('') String type,
-    @JsonKey(name: 'features') @Default([]) List<FeatureModel> features,
-  }) = _RestaurantModel;
+// @freezed
+// class RestaurantModel with _$RestaurantModel {
+//   factory RestaurantModel({
+//     @JsonKey(name: 'type') @Default('') String type,
+//     @JsonKey(name: 'features') @Default([]) List<FeatureModel> features,
+//   }) = _RestaurantModel;
 
-  factory RestaurantModel.fromJson(Map<String, dynamic> json) =>
-      _$RestaurantModelFromJson(json);
-}
+//   factory RestaurantModel.fromJson(Map<String, dynamic> json) =>
+//       _$RestaurantModelFromJson(json);
+// }
 
 @freezed
 class FeatureModel with _$FeatureModel {

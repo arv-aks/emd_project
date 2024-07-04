@@ -1,3 +1,4 @@
+import 'package:emd_project/gen/assets.gen.dart';
 import 'package:emd_project/src/application/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,8 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      // child: SvgPicture.asset("assets/splash_icon.svg"),
-      child: Text('Splash'),
+      child: SvgPicture.asset(Assets.images.appIcon, height: 200, width: 200),
+      
     ));
   }
 }

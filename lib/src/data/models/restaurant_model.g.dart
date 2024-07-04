@@ -6,23 +6,6 @@ part of 'restaurant_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$RestaurantModelImpl _$$RestaurantModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$RestaurantModelImpl(
-      type: json['type'] as String? ?? '',
-      features: (json['features'] as List<dynamic>?)
-              ?.map((e) => FeatureModel.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-    );
-
-Map<String, dynamic> _$$RestaurantModelImplToJson(
-        _$RestaurantModelImpl instance) =>
-    <String, dynamic>{
-      'type': instance.type,
-      'features': instance.features,
-    };
-
 _$FeatureModelImpl _$$FeatureModelImplFromJson(Map<String, dynamic> json) =>
     _$FeatureModelImpl(
       type: json['type'] as String? ?? '',

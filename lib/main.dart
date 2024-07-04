@@ -8,6 +8,7 @@ import 'package:emd_project/src/domain/repositories/restaurant_repo.dart';
 import 'package:emd_project/src/presentation/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 
@@ -21,7 +22,11 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp(
           options: DefaultFirebaseOptions.currentPlatform);
+      //configure dependencies
       initDependencies();
+      //for stripe payment integration
+      Stripe.publishableKey =
+          "pk_test_51PYtoFIrqOXT1j7hTYnSn6GvFxNLtXncMNR24vt227U4Y5r4QIVkD1NRTSfPVMioQPeaMdDF9khjdyN7qqUcDflr00gKQZQQQ8";
       runApp(const MyApp());
     },
     (error, stack) {
