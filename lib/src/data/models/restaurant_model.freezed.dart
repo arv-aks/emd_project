@@ -376,8 +376,6 @@ PropertiesModel _$PropertiesModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PropertiesModel {
-  @JsonKey(name: 'type')
-  String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'state')
@@ -394,8 +392,6 @@ mixin _$PropertiesModel {
   double get latitude => throw _privateConstructorUsedError;
   @JsonKey(name: 'formatted')
   String get formatted => throw _privateConstructorUsedError;
-  @JsonKey(name: 'contact')
-  ContactModel get contact => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -410,18 +406,14 @@ abstract class $PropertiesModelCopyWith<$Res> {
       _$PropertiesModelCopyWithImpl<$Res, PropertiesModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'type') String type,
-      @JsonKey(name: 'name') String name,
+      {@JsonKey(name: 'name') String name,
       @JsonKey(name: 'state') String state,
       @JsonKey(name: 'postcode') String postcode,
       @JsonKey(name: 'district') String district,
       @JsonKey(name: 'housenumber') String housenumber,
       @JsonKey(name: 'lon') double longitude,
       @JsonKey(name: 'lat') double latitude,
-      @JsonKey(name: 'formatted') String formatted,
-      @JsonKey(name: 'contact') ContactModel contact});
-
-  $ContactModelCopyWith<$Res> get contact;
+      @JsonKey(name: 'formatted') String formatted});
 }
 
 /// @nodoc
@@ -437,7 +429,6 @@ class _$PropertiesModelCopyWithImpl<$Res, $Val extends PropertiesModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = null,
     Object? name = null,
     Object? state = null,
     Object? postcode = null,
@@ -446,13 +437,8 @@ class _$PropertiesModelCopyWithImpl<$Res, $Val extends PropertiesModel>
     Object? longitude = null,
     Object? latitude = null,
     Object? formatted = null,
-    Object? contact = null,
   }) {
     return _then(_value.copyWith(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -485,19 +471,7 @@ class _$PropertiesModelCopyWithImpl<$Res, $Val extends PropertiesModel>
           ? _value.formatted
           : formatted // ignore: cast_nullable_to_non_nullable
               as String,
-      contact: null == contact
-          ? _value.contact
-          : contact // ignore: cast_nullable_to_non_nullable
-              as ContactModel,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ContactModelCopyWith<$Res> get contact {
-    return $ContactModelCopyWith<$Res>(_value.contact, (value) {
-      return _then(_value.copyWith(contact: value) as $Val);
-    });
   }
 }
 
@@ -510,19 +484,14 @@ abstract class _$$PropertiesModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'type') String type,
-      @JsonKey(name: 'name') String name,
+      {@JsonKey(name: 'name') String name,
       @JsonKey(name: 'state') String state,
       @JsonKey(name: 'postcode') String postcode,
       @JsonKey(name: 'district') String district,
       @JsonKey(name: 'housenumber') String housenumber,
       @JsonKey(name: 'lon') double longitude,
       @JsonKey(name: 'lat') double latitude,
-      @JsonKey(name: 'formatted') String formatted,
-      @JsonKey(name: 'contact') ContactModel contact});
-
-  @override
-  $ContactModelCopyWith<$Res> get contact;
+      @JsonKey(name: 'formatted') String formatted});
 }
 
 /// @nodoc
@@ -536,7 +505,6 @@ class __$$PropertiesModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = null,
     Object? name = null,
     Object? state = null,
     Object? postcode = null,
@@ -545,13 +513,8 @@ class __$$PropertiesModelImplCopyWithImpl<$Res>
     Object? longitude = null,
     Object? latitude = null,
     Object? formatted = null,
-    Object? contact = null,
   }) {
     return _then(_$PropertiesModelImpl(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -584,10 +547,6 @@ class __$$PropertiesModelImplCopyWithImpl<$Res>
           ? _value.formatted
           : formatted // ignore: cast_nullable_to_non_nullable
               as String,
-      contact: null == contact
-          ? _value.contact
-          : contact // ignore: cast_nullable_to_non_nullable
-              as ContactModel,
     ));
   }
 }
@@ -596,23 +555,18 @@ class __$$PropertiesModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PropertiesModelImpl implements _PropertiesModel {
   _$PropertiesModelImpl(
-      {@JsonKey(name: 'type') this.type = '',
-      @JsonKey(name: 'name') this.name = '',
+      {@JsonKey(name: 'name') this.name = '',
       @JsonKey(name: 'state') this.state = '',
       @JsonKey(name: 'postcode') this.postcode = '',
       @JsonKey(name: 'district') this.district = '',
       @JsonKey(name: 'housenumber') this.housenumber = '',
       @JsonKey(name: 'lon') this.longitude = 0.0,
       @JsonKey(name: 'lat') this.latitude = 0.0,
-      @JsonKey(name: 'formatted') this.formatted = '',
-      @JsonKey(name: 'contact') required this.contact});
+      @JsonKey(name: 'formatted') this.formatted = ''});
 
   factory _$PropertiesModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PropertiesModelImplFromJson(json);
 
-  @override
-  @JsonKey(name: 'type')
-  final String type;
   @override
   @JsonKey(name: 'name')
   final String name;
@@ -637,13 +591,10 @@ class _$PropertiesModelImpl implements _PropertiesModel {
   @override
   @JsonKey(name: 'formatted')
   final String formatted;
-  @override
-  @JsonKey(name: 'contact')
-  final ContactModel contact;
 
   @override
   String toString() {
-    return 'PropertiesModel(type: $type, name: $name, state: $state, postcode: $postcode, district: $district, housenumber: $housenumber, longitude: $longitude, latitude: $latitude, formatted: $formatted, contact: $contact)';
+    return 'PropertiesModel(name: $name, state: $state, postcode: $postcode, district: $district, housenumber: $housenumber, longitude: $longitude, latitude: $latitude, formatted: $formatted)';
   }
 
   @override
@@ -651,7 +602,6 @@ class _$PropertiesModelImpl implements _PropertiesModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PropertiesModelImpl &&
-            (identical(other.type, type) || other.type == type) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.state, state) || other.state == state) &&
             (identical(other.postcode, postcode) ||
@@ -665,14 +615,13 @@ class _$PropertiesModelImpl implements _PropertiesModel {
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
             (identical(other.formatted, formatted) ||
-                other.formatted == formatted) &&
-            (identical(other.contact, contact) || other.contact == contact));
+                other.formatted == formatted));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, type, name, state, postcode,
-      district, housenumber, longitude, latitude, formatted, contact);
+  int get hashCode => Object.hash(runtimeType, name, state, postcode, district,
+      housenumber, longitude, latitude, formatted);
 
   @JsonKey(ignore: true)
   @override
@@ -691,24 +640,19 @@ class _$PropertiesModelImpl implements _PropertiesModel {
 
 abstract class _PropertiesModel implements PropertiesModel {
   factory _PropertiesModel(
-          {@JsonKey(name: 'type') final String type,
-          @JsonKey(name: 'name') final String name,
+          {@JsonKey(name: 'name') final String name,
           @JsonKey(name: 'state') final String state,
           @JsonKey(name: 'postcode') final String postcode,
           @JsonKey(name: 'district') final String district,
           @JsonKey(name: 'housenumber') final String housenumber,
           @JsonKey(name: 'lon') final double longitude,
           @JsonKey(name: 'lat') final double latitude,
-          @JsonKey(name: 'formatted') final String formatted,
-          @JsonKey(name: 'contact') required final ContactModel contact}) =
+          @JsonKey(name: 'formatted') final String formatted}) =
       _$PropertiesModelImpl;
 
   factory _PropertiesModel.fromJson(Map<String, dynamic> json) =
       _$PropertiesModelImpl.fromJson;
 
-  @override
-  @JsonKey(name: 'type')
-  String get type;
   @override
   @JsonKey(name: 'name')
   String get name;
@@ -734,150 +678,7 @@ abstract class _PropertiesModel implements PropertiesModel {
   @JsonKey(name: 'formatted')
   String get formatted;
   @override
-  @JsonKey(name: 'contact')
-  ContactModel get contact;
-  @override
   @JsonKey(ignore: true)
   _$$PropertiesModelImplCopyWith<_$PropertiesModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-ContactModel _$ContactModelFromJson(Map<String, dynamic> json) {
-  return _ContactModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$ContactModel {
-  @JsonKey(name: 'phone')
-  String get phone => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ContactModelCopyWith<ContactModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ContactModelCopyWith<$Res> {
-  factory $ContactModelCopyWith(
-          ContactModel value, $Res Function(ContactModel) then) =
-      _$ContactModelCopyWithImpl<$Res, ContactModel>;
-  @useResult
-  $Res call({@JsonKey(name: 'phone') String phone});
-}
-
-/// @nodoc
-class _$ContactModelCopyWithImpl<$Res, $Val extends ContactModel>
-    implements $ContactModelCopyWith<$Res> {
-  _$ContactModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? phone = null,
-  }) {
-    return _then(_value.copyWith(
-      phone: null == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$ContactModelImplCopyWith<$Res>
-    implements $ContactModelCopyWith<$Res> {
-  factory _$$ContactModelImplCopyWith(
-          _$ContactModelImpl value, $Res Function(_$ContactModelImpl) then) =
-      __$$ContactModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({@JsonKey(name: 'phone') String phone});
-}
-
-/// @nodoc
-class __$$ContactModelImplCopyWithImpl<$Res>
-    extends _$ContactModelCopyWithImpl<$Res, _$ContactModelImpl>
-    implements _$$ContactModelImplCopyWith<$Res> {
-  __$$ContactModelImplCopyWithImpl(
-      _$ContactModelImpl _value, $Res Function(_$ContactModelImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? phone = null,
-  }) {
-    return _then(_$ContactModelImpl(
-      phone: null == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ContactModelImpl implements _ContactModel {
-  _$ContactModelImpl({@JsonKey(name: 'phone') this.phone = ''});
-
-  factory _$ContactModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ContactModelImplFromJson(json);
-
-  @override
-  @JsonKey(name: 'phone')
-  final String phone;
-
-  @override
-  String toString() {
-    return 'ContactModel(phone: $phone)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ContactModelImpl &&
-            (identical(other.phone, phone) || other.phone == phone));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, phone);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ContactModelImplCopyWith<_$ContactModelImpl> get copyWith =>
-      __$$ContactModelImplCopyWithImpl<_$ContactModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ContactModelImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _ContactModel implements ContactModel {
-  factory _ContactModel({@JsonKey(name: 'phone') final String phone}) =
-      _$ContactModelImpl;
-
-  factory _ContactModel.fromJson(Map<String, dynamic> json) =
-      _$ContactModelImpl.fromJson;
-
-  @override
-  @JsonKey(name: 'phone')
-  String get phone;
-  @override
-  @JsonKey(ignore: true)
-  _$$ContactModelImplCopyWith<_$ContactModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

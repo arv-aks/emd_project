@@ -30,7 +30,6 @@ class FeatureModel with _$FeatureModel {
 @freezed
 class PropertiesModel with _$PropertiesModel {
   factory PropertiesModel({
-    @JsonKey(name: 'type') @Default('') String type,
     @JsonKey(name: 'name') @Default('') String name,
     @JsonKey(name: 'state') @Default('') String state,
     @JsonKey(name: 'postcode') @Default('') String postcode,
@@ -39,19 +38,9 @@ class PropertiesModel with _$PropertiesModel {
     @JsonKey(name: 'lon') @Default(0.0) double longitude,
     @JsonKey(name: 'lat') @Default(0.0) double latitude,
     @JsonKey(name: 'formatted') @Default('') String formatted,
-    @JsonKey(name: 'contact') required ContactModel contact,
   }) = _PropertiesModel;
 
   factory PropertiesModel.fromJson(Map<String, dynamic> json) =>
       _$PropertiesModelFromJson(json);
 }
 
-@freezed
-class ContactModel with _$ContactModel {
-  factory ContactModel({
-    @JsonKey(name: 'phone') @Default('') String phone,
-  }) = _ContactModel;
-
-  factory ContactModel.fromJson(Map<String, dynamic> json) =>
-      _$ContactModelFromJson(json);
-}

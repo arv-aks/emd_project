@@ -39,7 +39,6 @@ Map<String, dynamic> _$$FeatureModelImplToJson(_$FeatureModelImpl instance) =>
 _$PropertiesModelImpl _$$PropertiesModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PropertiesModelImpl(
-      type: json['type'] as String? ?? '',
       name: json['name'] as String? ?? '',
       state: json['state'] as String? ?? '',
       postcode: json['postcode'] as String? ?? '',
@@ -48,13 +47,11 @@ _$PropertiesModelImpl _$$PropertiesModelImplFromJson(
       longitude: (json['lon'] as num?)?.toDouble() ?? 0.0,
       latitude: (json['lat'] as num?)?.toDouble() ?? 0.0,
       formatted: json['formatted'] as String? ?? '',
-      contact: ContactModel.fromJson(json['contact'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$PropertiesModelImplToJson(
         _$PropertiesModelImpl instance) =>
     <String, dynamic>{
-      'type': instance.type,
       'name': instance.name,
       'state': instance.state,
       'postcode': instance.postcode,
@@ -63,15 +60,4 @@ Map<String, dynamic> _$$PropertiesModelImplToJson(
       'lon': instance.longitude,
       'lat': instance.latitude,
       'formatted': instance.formatted,
-      'contact': instance.contact,
-    };
-
-_$ContactModelImpl _$$ContactModelImplFromJson(Map<String, dynamic> json) =>
-    _$ContactModelImpl(
-      phone: json['phone'] as String? ?? '',
-    );
-
-Map<String, dynamic> _$$ContactModelImplToJson(_$ContactModelImpl instance) =>
-    <String, dynamic>{
-      'phone': instance.phone,
     };

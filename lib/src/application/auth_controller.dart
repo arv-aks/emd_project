@@ -35,7 +35,6 @@ class AuthController extends GetxController {
       isLoading.value = false;
       Get.offAll(() => const LoginScreen());
     } else {
-      print("user: $user");
       Get.offAll(() => const HomeScreen());
     }
   }

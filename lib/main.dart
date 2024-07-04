@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:emd_project/firebase_options.dart';
 import 'package:emd_project/src/application/auth_controller.dart';
+import 'package:emd_project/src/application/home_controller.dart';
+import 'package:emd_project/src/data/repositories/restaurant_repo_impl.dart';
+import 'package:emd_project/src/domain/repositories/restaurant_repo.dart';
 import 'package:emd_project/src/presentation/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -42,4 +45,6 @@ class MyApp extends StatelessWidget {
 
 void initDependencies() {
   Get.lazyPut<AuthController>(() => AuthController());
+  Get.put<HomeController>(HomeController());
+  Get.lazyPut<RestaurantRepo>(() => RestaurantRepoImpl());
 }

@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
                   border: OutlineInputBorder(),
                 ),
               ),
-              Gap(16),
+              const Gap(16),
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(
