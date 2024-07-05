@@ -4,6 +4,7 @@ import 'package:emd_project/src/data/repositories/restaurant_repo_impl.dart';
 import 'package:emd_project/src/domain/repositories/payment_repo.dart';
 import 'package:emd_project/src/domain/repositories/restaurant_repo.dart';
 import 'package:emd_project/src/domain/result.dart';
+import 'package:emd_project/src/presentation/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:geocoding/geocoding.dart';
@@ -61,6 +62,9 @@ class HomeController extends GetxController {
         markerId: MarkerId(element.hashCode.toString()),
         position:
             LatLng(element.properties.latitude, element.properties.longitude),
+        onTap: () {
+          RestaurantCard.showMakePaymentDialog(properties: element.properties);
+        },
       );
     }).toList();
 

@@ -1,8 +1,8 @@
 import 'package:emd_project/src/application/home_controller.dart';
-import 'package:emd_project/src/data/models/restaurant_model.dart';
 import 'package:emd_project/src/presentation/screens/map_screen.dart';
 import 'package:emd_project/src/presentation/screens/profile_screen.dart';
 import 'package:emd_project/src/presentation/widgets/custom_loading.dart';
+import 'package:emd_project/src/presentation/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
@@ -38,7 +38,7 @@ class HomeScreen extends GetView<HomeController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Nearby Restaurants'),
+                               Text('Nearby Restaurants: '"(${controller.restaurantList.length})"),
                               TextButton.icon(
                                 onPressed: () {
                                   Get.to(const MapScreen());
@@ -74,52 +74,3 @@ class HomeScreen extends GetView<HomeController> {
   }
 }
 
-class RestaurantCard extends GetView<HomeController> {
-  const RestaurantCard({super.key, required this.restaurantProperties});
-
-  final PropertiesModel restaurantProperties;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        Get.dialog(Dialog(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text("Checking out ?"),
-                const Gap(10),
-                TextButton.icon(
-                  onPressed: () async {
-                    await controller.makePayment().then(
-                      (value) {
-                        Get.back();
-                        Get.snackbar("Payment", "${value.$2}");
-                      },
-                    );
-                  },
-                  label: const Text('Make Payment'),
-                  icon: const Icon(FontAwesomeIcons.moneyBill),
-                )
-              ],
-            ),
-          ),
-        ));
-      },
-      child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.blue,
-              border: Border.all(color: Colors.black)),
-          child: Column(
-            children: [
-              Text(restaurantProperties.name),
-              Text(restaurantProperties.formatted),
-            ],
-          )),
-    );
-  }
-}
