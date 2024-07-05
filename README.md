@@ -1,21 +1,27 @@
-# Project Setup
 
-## Setup Instructions
+## Documentation
 
-1. **Create a New Flutter Project:**
-   ```bash
-   flutter create project_name
-   cd project_name
+[Documentation](https://linktodocumentation)
 
+
+## Installation
+
+Install flutter project 
+
+```bash
+  flutter create project_name
+```
+    
 ## Project Structure
+
 1. **Application:** Contains controllers.
 2. **Core:** Contains constants.
 3. **Data:** Contains models and repositories.
 4. **Domain:** Contains abstract classes for repositories and network required dependencies.
 5. **Presentation:** Contains screens (UI).
 
-## Dependencies
 
+## Dependencies
 ### Runtime Dependencies
 - **dio:** ^5.4.3+1
   - For network calls.
@@ -78,3 +84,26 @@
 - **json_serializable:** ^6.8.0
   - For generating JSON serialization code.
 
+
+## Api Keys, Authentication, Payments
+**Google Maps API Key:** Get API key from the Google Cloud Platform.
+
+**Firebase Authentication:** Set up Firebase project and enable signIn methods for email and Google.
+
+**Stripe Payment:** Create an account on Stripe, obtain your publishable and secret keys, and follow the Flutter Stripe setup guide.
+
+## For stripe payments setup
+
+Follow the instructions: https://pub.dev/packages/flutter_stripe
+
+## Fetch Nearby Restaurants
+Use the GeoApify api: https://myprojects.geoapify.com/projects
+
+Create an account and get your API key.
+Test the URL on the playground and use it in your Flutter app to get nearby restaurants based on the provided latitude and longitude.
+
+## Final Notes
+1. Cloud functions are not required for this project.
+2. Location-related calls are in HomeController. These can be moved to another repository to improve code readability.
+3. API keys can be stored in .env files to avoid exposing them in the code.
+4. Email and password login and signup are combined. If a new user tries to log in, they will be automatically signed up and treated the same as a login.
