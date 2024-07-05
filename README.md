@@ -100,7 +100,7 @@ Install flutter project
 Follow the instructions: https://pub.dev/packages/flutter_stripe
 
 ## Fetch Nearby Restaurants
-Use the GeoApify api: https://myprojects.geoapify.com/projects
+Use the GeoApify api: https://myprojects.geoapify.com
 
 Create an account and get your API key.
 Test the URL on the playground and use it in your Flutter app to get nearby restaurants based on the provided latitude and longitude.
