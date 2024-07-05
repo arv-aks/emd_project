@@ -13,6 +13,7 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.initLocation();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Restaurants'),
@@ -29,48 +30,68 @@ class HomeScreen extends GetView<HomeController> {
           () {
             return controller.isLoading.value
                 ? const CustomLoading()
-                : Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16, top: 5),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                               Text('Nearby Restaurants: '"(${controller.restaurantList.length})"),
-                              TextButton.icon(
-                                onPressed: () {
-                                  Get.to(const MapScreen());
-                                },
-                                label: const Text('Show on Map'),
-                                icon: const Icon(FontAwesomeIcons.arrowRight,
-                                    size: 16),
-                                iconAlignment: IconAlignment.end,
-                              )
-                            ],
-                          ),
+                : controller.locationStatus.value == LocationStatus.inProgress
+                    ? const Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Text("Getting your location..."),
                         ),
-                        Expanded(
-                          child: ListView.separated(
-                              itemCount: controller.restaurantList.length,
-                              itemBuilder: (context, index) {
-                                final restaurant =
-                                    controller.restaurantList[index];
-                                return RestaurantCard(
-                                    restaurantProperties:
-                                        restaurant.properties);
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const Gap(10)),
-                        ),
-                      ],
-                    ),
-                  );
+                      )
+                    : controller.locationStatus.value == LocationStatus.failure
+                        ? const Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Text(
+                                  "Unable to get your location. Try again"),
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(
+                                left: 16, right: 16, top: 5),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Nearby Restaurants: '
+                                          "(${controller.restaurantList.length})"),
+                                      TextButton.icon(
+                                        onPressed: () {
+                                          Get.to(const MapScreen());
+                                        },
+                                        label: const Text('Show on Map'),
+                                        icon: const Icon(
+                                            FontAwesomeIcons.arrowRight,
+                                            size: 16),
+                                        iconAlignment: IconAlignment.end,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: ListView.separated(
+                                      itemCount:
+                                          controller.restaurantList.length,
+                                      itemBuilder: (context, index) {
+                                        final restaurant =
+                                            controller.restaurantList[index];
+                                        return RestaurantCard(
+                                            restaurantProperties:
+                                                restaurant.properties);
+                                      },
+                                      separatorBuilder: (context, index) =>
+                                          const Gap(10)),
+                                ),
+                              ],
+                            ),
+                          );
           },
         ),
       ),
     );
   }
 }
-

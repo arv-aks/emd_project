@@ -1,6 +1,4 @@
 import 'package:emd_project/src/data/models/restaurant_model.dart';
-import 'package:emd_project/src/data/repositories/payment_repo_impl.dart';
-import 'package:emd_project/src/data/repositories/restaurant_repo_impl.dart';
 import 'package:emd_project/src/domain/repositories/payment_repo.dart';
 import 'package:emd_project/src/domain/repositories/restaurant_repo.dart';
 import 'package:emd_project/src/domain/result.dart';
@@ -8,12 +6,23 @@ import 'package:emd_project/src/presentation/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+enum LocationStatus {
+  inProgress,
+  success,
+  failure,
+}
+
+//Home Screen controller
+//Some methods can be moved to another repositories to make the core more readable. 
 
 class HomeController extends GetxController {
-  late final RestaurantRepo _restaurantRepo;
-  late final PaymentRepo _paymentRepo;
+  final RestaurantRepo _restaurantRepo = Get.find<RestaurantRepo>();
+  final PaymentRepo _paymentRepo = Get.find<PaymentRepo>();
 
   var isLoading = false.obs;
 
@@ -24,33 +33,93 @@ class HomeController extends GetxController {
 
   late GoogleMapController mapController;
 
-  @override
-  void onInit() {
-    super.onInit();
-    //ask for location permission....
-    _restaurantRepo = Get.put<RestaurantRepo>(RestaurantRepoImpl());
-    _paymentRepo = Get.put<PaymentRepo>(PaymentRepoImpl());
-    getRestaurantsData();
+  Rx<LocationStatus> locationStatus = LocationStatus.inProgress.obs;
+  Position? position;
+
+  void initLocation() async {
+    bool isServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (!isServiceEnabled) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    Future<void> handlePosition() async {
+      final currentPosition = await getCurrentLocation();
+      if (currentPosition is Success<Position?>) {
+        final pos = currentPosition.data;
+        position = pos;
+        locationStatus.value = LocationStatus.success;
+        await getRestaurantsData(position: position);
+      } else {
+        locationStatus.value = LocationStatus.failure;
+      }
+    }
+
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse) {
+      await handlePosition();
+    } else if (permission == LocationPermission.deniedForever) {
+      await openAppSettings().then(
+        (value) async {
+          if (value) {
+            await handlePosition();
+          } else {
+            locationStatus.value = LocationStatus.failure;
+          }
+        },
+      );
+    } else {
+      locationStatus.value = LocationStatus.failure;
+    }
   }
 
-  void getRestaurantsData() async {
-    isLoading.value = true;
-    //static location:
-    final Location location = Location(
-        latitude: 28.6204506, longitude: 77.2181178, timestamp: DateTime.now());
+  Future<Result<Position?>> getCurrentLocation() async {
+    Position? position;
+    try {
+      await Geolocator.getCurrentPosition(
+              desiredAccuracy: LocationAccuracy.high,
+              timeLimit: const Duration(seconds: 5))
+          .then((pos) async {
+        position = pos;
+      });
 
-    final result =
-        await _restaurantRepo.getRestaurantsBasedOnLocation(location: location);
-
-    if (result is Success) {
-      final data = result.data as List<FeatureModel>;
-
-      restaurantList.value = data;
-    } else if (result is Error) {
-      restaurantList.value = [];
+      return Success(data: position);
+    } catch (err) {
+      return Error(
+          exception: Exception(err.toString()),
+          message: "Error while getting location");
     }
-    restaurantList.refresh();
-    isLoading.value = false;
+  }
+
+  Future<void> getRestaurantsData({required Position? position}) async {
+    if (position != null) {
+      isLoading.value = true;
+
+      //static location:
+      final Location location = Location(
+          latitude: position.latitude,
+          longitude: position.longitude,
+          timestamp: DateTime.now());
+
+      final result = await _restaurantRepo.getRestaurantsBasedOnLocation(
+          location: location);
+
+      if (result is Success) {
+        final data = result.data as List<FeatureModel>;
+
+        restaurantList.value = data;
+      } else if (result is Error) {
+        restaurantList.value = [];
+      }
+      restaurantList.refresh();
+      isLoading.value = false;
+    }
   }
 
   void buildMapMarkers() {
