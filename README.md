@@ -9,7 +9,7 @@ https://github.com/arv-aks/emd_project/assets/84610386/348f458a-b13f-4913-8c24-1
 
 ## Project setup
 
-Install flutter project 
+Create flutter project 
 
 ```bash
   flutter create project_name
