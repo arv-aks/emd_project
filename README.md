@@ -1,6 +1,6 @@
 
 ## Result
-### With Gmail Login
+### With Google Login
 https://github.com/arv-aks/emd_project/assets/84610386/5c7bc0e9-effe-4aa8-946e-9b6dcb8d16e3
 
 ### With Email and password Login
